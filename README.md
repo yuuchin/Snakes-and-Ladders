@@ -47,7 +47,7 @@ Further Containerized after 3 years by [sahal56](https://github.com/sahal56)
 
   ---
   ## YAY It Works !!! ✨✨✨
-  - Visit at <a href="[/page/url/](http://localhost:80)" target="_blank"> localhost:80 </a>
+  - Visit at <a href="http://localhost:80" target="_blank"> localhost:80 </a>
   
   #### Screensots
   
