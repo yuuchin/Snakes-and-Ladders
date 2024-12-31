@@ -35,7 +35,7 @@ Further Containerized after 3 years by [sahal56](https://github.com/sahal56)
   ## Running 🚀
   - Run Docker Image
   ```sh
-  $ docker run -d -p 80:8080 sahal56/snakes-ladders-distroless:latest
+  $ docker run -d -p 80:8080 <image-name>
   ```
   > port mapping: -p <host-port>:<container-port>
 
@@ -47,11 +47,13 @@ Further Containerized after 3 years by [sahal56](https://github.com/sahal56)
 
   ---
   ## YAY It Works !!! ✨✨✨
-  - Visit at [localhost:80](http://localhost:80)
-
+  - Visit at <a href="[/page/url/](http://localhost:80)" target="_blank"> localhost:80 </a>
+  
   #### Screensots
-
-
+  
+  <img width="1174" alt="op-local-1" src="https://github.com/user-attachments/assets/0644aeb9-f5b3-4854-a3e5-e541c343c27f" />
+  
+  <img width="1174" alt="op-local-2" src="https://github.com/user-attachments/assets/7bffa648-5771-49ad-b6bb-28824e85be1f" />
 
 </details>
 
