@@ -5,13 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snakes and ladders</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./assets/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
   <!-- meta config for LinkedIn preview -->
   <meta property="og:title" content="Snakes and Ladders Game" />
   <meta property="og:description" content="Open-source game developed by friends and I (vanilla HTML CSS JavaScript)" />
   <meta property="og:url" content="https://yuuchin.github.io/Snakes-and-Ladders/" />
-  <meta property="og:image" content="img/ThumbnailSnakesAndLadder.jpg" />
+  <meta property="og:image" content="./assets/images/ThumbnailSnakesAndLadder.jpg" />
+
+  <!-- icon -->
+  <link rel="icon" href="./assets/images/ThumbnailSnakesAndLadder.jpg" type="image/icon type">
+
 </head>
 
 <body>
@@ -28,11 +32,11 @@
 
     <header>
       <h1 class="m-0">Snakes and Ladders</h1>
-      
+
       <div class="controls">
         <button id="roll-dice" class="button" onclick="rollDice()">Roll dice</button>
         <p id="dice-results" class="inline m-0 m-lr"></p>
-        
+
         <div id="win" hidden style="float: right">
           <h3 id="win-text" class="inline m-0 m-lr">You win!</h3>
           <button class="button" onclick="restart()">Restart</button>
@@ -69,6 +73,6 @@
 
 
 </body>
-<script src="./script.js"></script>
+<script src="./assets/script.js"></script>
 
 </html>
