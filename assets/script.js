@@ -1,22 +1,22 @@
 
-const cssColorsOriginal=["lightblue","lightgray","pink","red","yellow"];
-let cssColors=cssColorsOriginal;
+const cssColorsOriginal = ["lightblue", "lightgray", "pink", "red", "yellow"];
+let cssColors = cssColorsOriginal;
 class Player {
 	constructor(x, y, id) {
 		this.x = x;
 		this.y = y;
-		this.id=id;
+		this.id = id;
 	}
-	getDomElement(){
-		if(!this.dom){
+	getDomElement() {
+		if (!this.dom) {
 			this.dom = document.createElement("div");
 			this.dom.classList.add("player");
-			let idx=randIntv1(cssColors.length);
-			this.dom.style["background"]=cssColors[idx];
-			cssColors.splice(idx,1);
-			this.dom.style["marginLeft"]=`${randIntv1(20)}px`;
-			this.dom.style["marginTop"]=`${randIntv1(20)}px`;
-			let text=document.createTextNode(this.id);
+			let idx = randIntv1(cssColors.length);
+			this.dom.style["background"] = cssColors[idx];
+			cssColors.splice(idx, 1);
+			this.dom.style["marginLeft"] = `${randIntv1(20)}px`;
+			this.dom.style["marginTop"] = `${randIntv1(20)}px`;
+			let text = document.createTextNode(this.id);
 			this.dom.appendChild(text);
 		}
 		return this.dom;
@@ -56,8 +56,8 @@ class Snake {
 const height = 10;
 const width = 10;
 
-let players =[];
-let currentPlayer,playerIterator;
+let players = [];
+let currentPlayer, playerIterator;
 
 //normally have 8 to 9 ladders, and one less snake to ladders
 let ladders = [
@@ -81,51 +81,51 @@ let snakes = [
 	new Snake(8, 5, 9, 4),
 ]
 
-function randIntv1(x){
-	return Math.trunc((Math.random()*100000)%x);
+function randIntv1(x) {
+	return Math.trunc((Math.random() * 100000) % x);
 }
 
-function* cyclicIterator(v){
-	let i=0;
-	let j=v.length;
-	while(true){
-		yield {idx:i,value:v[i]};
-		j=v.length;
-		i=(i+1)%j;
+function* cyclicIterator(v) {
+	let i = 0;
+	let j = v.length;
+	while (true) {
+		yield { idx: i, value: v[i] };
+		j = v.length;
+		i = (i + 1) % j;
 	}
 }
 
-function startGame(){
-	let selector=document.querySelector("#player-num");
-	if(!selector.checkValidity()){
+function startGame() {
+	let selector = document.querySelector("#player-num");
+	if (!selector.checkValidity()) {
 		alert("Please select a valid number from 2 to 4");
-		selector.valueAsNumber=2;
+		selector.valueAsNumber = 2;
 		return;
 	}
 	//with the correct values provided lets setup the internal structures
-	let v=selector.valueAsNumber;
-	for(let i=0;i<v;i++){
-		players.push(new Player(0,0,i+1));
+	let v = selector.valueAsNumber;
+	for (let i = 0; i < v; i++) {
+		players.push(new Player(0, 0, i + 1));
 	}
 	//initialize the iterators
-	playerIterator=cyclicIterator(players);
-	currentPlayer=playerIterator.next().value;
+	playerIterator = cyclicIterator(players);
+	currentPlayer = playerIterator.next().value;
 	//show the game board
-	document.querySelector("#gameboard").hidden=false;
-	document.querySelector("#welcome").hidden=true;
-	document.getElementById("dice-results").innerText=`Player ${currentPlayer.idx+1}'s turn`;
+	document.querySelector("#gameboard").hidden = false;
+	document.querySelector("#welcome").hidden = true;
+	document.getElementById("dice-results").innerText = `Player ${currentPlayer.idx + 1}'s turn`;
 	document.getElementById("roll-dice").disabled = false;
 	renderBoard();
 }
 
 function restart() {
 	document.getElementById("win").hidden = true;
-	document.querySelector("#gameboard").hidden=true;
-	document.querySelector("#welcome").hidden=false;
-	players=[]; //clear the player list
-	cssColors=cssColorsOriginal; //reset the colors
-	currentPlayer=undefined;
-	playerIterator=undefined; //clear the ptrs
+	document.querySelector("#gameboard").hidden = true;
+	document.querySelector("#welcome").hidden = false;
+	players = []; //clear the player list
+	cssColors = cssColorsOriginal; //reset the colors
+	currentPlayer = undefined;
+	playerIterator = undefined; //clear the ptrs
 }
 
 function initializeBoard() {
@@ -140,7 +140,7 @@ function initializeBoard() {
 	return board;
 }
 
-function initializeLadders() {}
+function initializeLadders() { }
 
 function renderBoard() {
 	let output = document.getElementById("board");
@@ -151,7 +151,7 @@ function renderBoard() {
 			tile.classList.add("tile");
 
 			players.forEach((player) => {
-				if(player.x == x && player.y == y){
+				if (player.x == x && player.y == y) {
 					tile.appendChild(player.getDomElement());
 				}
 			});
@@ -161,7 +161,7 @@ function renderBoard() {
 }
 
 async function rollDice() {
-	let result = randIntv1(6)+1;
+	let result = randIntv1(6) + 1;
 	// result = 1;
 	document.getElementById("dice-results").innerText = `dice: ${result}`;
 	document.getElementById("roll-dice").disabled = true;
@@ -169,7 +169,7 @@ async function rollDice() {
 		await new Promise(resolve => setTimeout(resolve, 200));
 		movePlayer(currentPlayer.value);
 		// setTimeout(movePlayer, 200 * i);
-		if(checkWin(currentPlayer))return i+1;
+		if (checkWin(currentPlayer)) return i + 1;
 	}
 	document.getElementById("roll-dice").disabled = false;
 	//make it slower
@@ -178,8 +178,8 @@ async function rollDice() {
 	checkLadder(currentPlayer.value);
 	checksnakes(currentPlayer.value);
 	//next player
-	currentPlayer=playerIterator.next().value;
-	document.getElementById("dice-results").innerText=`Player ${currentPlayer.idx+1}'s turn`;
+	currentPlayer = playerIterator.next().value;
+	document.getElementById("dice-results").innerText = `Player ${currentPlayer.idx + 1}'s turn`;
 	return result;
 }
 
@@ -225,14 +225,14 @@ function checksnakes(player) {
 }
 
 function checkWin(data) {
-	let player=data.value;
-	let idx=data.idx;
+	let player = data.value;
+	let idx = data.idx;
 	if (height % 2 == 0) {
 		// player wins when they are at x = 0
 		if (player.y >= height - 1 && player.x <= 0) {
 			console.log("WIN");
 			document.getElementById("win").hidden = false;
-			document.getElementById("win-text").innerHTML=`Player ${idx+1} wins`;
+			document.getElementById("win-text").innerHTML = `Player ${idx + 1} wins`;
 			return true;
 		}
 	} else {
@@ -240,7 +240,7 @@ function checkWin(data) {
 		if (player.y >= height - 1 && player.x >= width - 1) {
 			console.log("WIN");
 			document.getElementById("win").hidden = false;
-			document.getElementById("win-text").innerHTML=`Player ${idx+1} wins`;
+			document.getElementById("win-text").innerHTML = `Player ${idx + 1} wins`;
 			return true;
 		}
 	}
@@ -248,8 +248,8 @@ function checkWin(data) {
 
 function openDrawer() {
 	document.getElementById("drawer").style.width = "400px";
-  }
+}
 
-  function closeDrawer() {
+function closeDrawer() {
 	document.getElementById("drawer").style.width = "0";
-  }
+}
